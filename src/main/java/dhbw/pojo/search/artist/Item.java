@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import dhbw.pojo.search.GeneralItem;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -23,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "type",
     "uri"
 })
-public class Item {
+public class Item implements GeneralItem {
 
     @JsonProperty("external_urls")
     private ExternalUrls externalUrls;
