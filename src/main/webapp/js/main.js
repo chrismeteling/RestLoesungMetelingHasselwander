@@ -42,14 +42,12 @@ $(document).ready(() => {
             var infoAdditionalInfo;
             switch (response.results[0].description){
                 case "track": infoAdditionalInfo="Duration in seconds";
-                    console.log("wubba"+infoAdditionalInfo);
                     break;
                 case "album": infoAdditionalInfo="ReleaseDate";
                     break;
                  case "artist": infoAdditionalInfo="Popularity";
                      break;
             }
-            console.log(infoAdditionalInfo);
             $("#additionalInfo").text(infoAdditionalInfo);
             //append row for each item in response array
             $('#resultList').append(
