@@ -5,13 +5,16 @@ public class SearchResultList {
     private String title;
     private String description;
     private String playLink;
+    private String additionalInfo;
 
-    public SearchResultList(String id, String titel, String description, String playLink) {
+    public SearchResultList(String id, String title, String description, String playLink, String additionalInfo) {
         this.id = id;
-        this.title = titel;
+        this.title = title;
         this.description = description;
         this.playLink = playLink;
+        this.additionalInfo = additionalInfo;
     }
+
 
     public SearchResultList(){
 
@@ -47,5 +50,13 @@ public class SearchResultList {
 
     public void setPlayLink(String playLink) {
         this.playLink = playLink;
+    }
+
+    public String getAdditionalInfo() {
+        return additionalInfo;
+    }
+
+    public void setAdditionalInfo(String additionalInfo) {
+        this.additionalInfo = additionalInfo;
     }
 }

@@ -39,7 +39,18 @@ $(document).ready(() => {
             $('#resultList').on('click', '#playButton', event=> {
                 $('#spotify-player').attr("src", "https://open.spotify.com/embed?uri=" + $(event.currentTarget).data('spotifylink'));
             });
-
+            var infoAdditionalInfo;
+            switch (response.results[0].description){
+                case "track": infoAdditionalInfo="Duration in seconds";
+                    console.log("wubba"+infoAdditionalInfo);
+                    break;
+                case "album": infoAdditionalInfo="ReleaseDate";
+                    break;
+                 case "artist": infoAdditionalInfo="Popularity";
+                     break;
+            }
+            console.log(infoAdditionalInfo);
+            $("#additionalInfo").text(infoAdditionalInfo);
             //append row for each item in response array
             $('#resultList').append(
                 $.map(response.results, (item) => {
@@ -49,6 +60,8 @@ $(document).ready(() => {
                 	    + '</td><td>'
                 	    + item.description
             	        + '</td><td>'
+                        + item.additionalInfo
+                        +  '</td><td>'
                 	    + '<a class="waves-effect waves-light btn" data-typeid="' + searchType + '"data-spotifyid="' + item.id + '" id="infoButton"><i class="material-icons left">info</i>more</a>&nbsp;'
             	        + '<a class="waves-effect waves-light btn" data-spotifylink="' + item.playLink + '" id="playButton"><i class="material-icons left">play_circle_filled</i>play</a>'
             	        + '</td></tr>';

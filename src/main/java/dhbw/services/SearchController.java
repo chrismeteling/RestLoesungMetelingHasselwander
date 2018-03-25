@@ -42,18 +42,18 @@ public class SearchController {
                 switch(type) {
                     case TRACK:
                         SearchTrack sTrack = mapper.readValue(searchParam, SearchTrack.class);
-                        for (GeneralItem item : sTrack.getTracks().getItems())
-                            setResponse(item, responseList);
+                        for (dhbw.pojo.search.track.Item itemtr : sTrack.getTracks().getItems())
+                            setResponse(itemtr, responseList, Long.toString(itemtr.getDurationMs()/1000) );
                         break;
                     case ALBUM:
                         SearchAlbum sAlbum = mapper.readValue(searchParam, SearchAlbum.class);
-                        for (GeneralItem item : sAlbum.getAlbums().getItems())
-                            setResponse(item, responseList);
+                        for (dhbw.pojo.search.album.Item itemAl : sAlbum.getAlbums().getItems())
+                            setResponse(itemAl, responseList, itemAl.getReleaseDate());
                         break;
                     case ARTIST:
                         SearchArtist sArtist = mapper.readValue(searchParam, SearchArtist.class);
-                        for (GeneralItem item : sArtist.getArtists().getItems())
-                            setResponse(item, responseList);
+                        for (dhbw.pojo.search.artist.Item itemAr : sArtist.getArtists().getItems())
+                            setResponse(itemAr, responseList, itemAr.getPopularity().toString());
                         break;
                 }
             }
@@ -63,12 +63,13 @@ public class SearchController {
         return response;
     }
 
-    private void setResponse(GeneralItem item, List<SearchResultList> responseList){
+    private void setResponse(GeneralItem item, List<SearchResultList> responseList, String additional){
         SearchResultList si = new SearchResultList();
         si.setId(item.getId());
         si.setPlayLink(item.getUri());
         si.setTitle(item.getName());
         si.setDescription(item.getType());
+        si.setAdditionalInfo(additional);
         responseList.add(si);
     }
 }
