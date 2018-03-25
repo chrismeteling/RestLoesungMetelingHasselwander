@@ -5,4 +5,6 @@ public interface Details {
      void setName(String Name);
      String getType();
      void setType(String type);
+     String getHref();
+     void setHref(String releaseDate);
 }

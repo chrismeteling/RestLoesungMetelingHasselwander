@@ -27,15 +27,22 @@ public class DetailController {
             if(optional.isPresent()) {
                 String searchParam = optional.get();
                 ObjectMapper mapper = new ObjectMapper();
+
                 switch (type) {
                     case ALBUM:
-                        setResponse(mapper.readValue(searchParam, DetailsAlbum.class), response);
+                        DetailsAlbum detailsAl =mapper.readValue(searchParam, DetailsAlbum.class);
+                        setResponse(detailsAl, response);
+                        response.setAdditionalInfo(detailsAl.getReleaseDate());
                         break;
                     case TRACK:
-                        setResponse(mapper.readValue(searchParam, DetailsTrack.class), response);
+                        DetailsTrack detailsTr =mapper.readValue(searchParam, DetailsTrack.class);
+                        setResponse(detailsTr, response);
+                        response.setAdditionalInfo(Long.toString(detailsTr.getDurationMs()/1000));
                         break;
                     case ARTIST:
-                        setResponse(mapper.readValue(searchParam, DetailsArtist.class), response);
+                        DetailsArtist detailsAr =mapper.readValue(searchParam, DetailsArtist.class);
+                        setResponse(detailsAr, response);
+                        response.setAdditionalInfo(detailsAr.getFollowers().getTotal().toString());
                         break;
                 }
             }
@@ -48,5 +55,7 @@ public class DetailController {
     private void setResponse(Details details, DetailResult response){
         response.setTitle(details.getName());
         response.setInfo(details.getType());
+
+        response.setHref(details.getHref());
     }
 }

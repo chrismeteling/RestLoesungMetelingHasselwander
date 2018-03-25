@@ -23,7 +23,16 @@ $(document).ready(() => {
                 console.log('url:' + urlDetailsThis);
 
                 $.getJSON(urlDetailsThis, (responseDetail) => {
-                    alert(responseDetail.title + ':\n' + responseDetail.info);
+                    var infoAdditionalInfo;
+                    switch (responseDetail.info){
+                        case "track": infoAdditionalInfo="Duration in seconds--";
+                        break;
+                        case "album": infoAdditionalInfo="ReleaseDate--";
+                            break;
+                        case "artist": infoAdditionalInfo="Follower--";
+                            break;
+                    }
+                    alert("Titel--"+responseDetail.title +':\n'+"Typ--" + responseDetail.info +':\n'+"Link--" + responseDetail.href+':\n'+infoAdditionalInfo + responseDetail.additionalInfo);
                 })
             });
 
