@@ -31,18 +31,15 @@ public class DetailController {
                 switch (type) {
                     case ALBUM:
                         DetailsAlbum detailsAl =mapper.readValue(searchParam, DetailsAlbum.class);
-                        setResponse(detailsAl, response);
-                        response.setAdditionalInfo(detailsAl.getReleaseDate());
+                        setResponse(detailsAl, response, detailsAl.getReleaseDate());
                         break;
                     case TRACK:
                         DetailsTrack detailsTr =mapper.readValue(searchParam, DetailsTrack.class);
-                        setResponse(detailsTr, response);
-                        response.setAdditionalInfo(Long.toString(detailsTr.getDurationMs()/1000));
+                        setResponse(detailsTr, response, Long.toString(detailsTr.getDurationMs()/1000));
                         break;
                     case ARTIST:
                         DetailsArtist detailsAr =mapper.readValue(searchParam, DetailsArtist.class);
-                        setResponse(detailsAr, response);
-                        response.setAdditionalInfo(detailsAr.getFollowers().getTotal().toString());
+                        setResponse(detailsAr, response, detailsAr.getFollowers().getTotal().toString());
                         break;
                 }
             }
@@ -52,10 +49,10 @@ public class DetailController {
         return response;
     }
 
-    private void setResponse(Details details, DetailResult response){
+    private void setResponse(Details details, DetailResult response, String additional){
         response.setTitle(details.getName());
         response.setInfo(details.getType());
-
         response.setHref(details.getHref());
+        response.setAdditionalInfo(additional);
     }
 }
